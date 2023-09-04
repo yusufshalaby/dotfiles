@@ -5,11 +5,21 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "monekai",
-  theme_toggle = { "monekai", "one_light" },
+  theme = "nightfox",
+  theme_toggle = { "nightfox", "one_light" },
 
   hl_override = highlights.override,
   hl_add = highlights.add,
+  --[[ transparency = true,
+
+  changed_themes = {
+    nightfox = {
+      base_30 = {
+  -- Controlling the color of the line numbers
+        grey = "#7b7b7c",
+      }
+    }
+  } ]]
 }
 
 M.plugins = "custom.plugins"

@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -25,7 +25,7 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
@@ -47,6 +47,15 @@ local plugins = {
     end,
   },
 
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      extensions_list = { "themes", "terms", "fzf" },
+    },
+  },
+
   {
     "zbirenbaum/copilot.lua",
     -- Lazy load when event occurs. Events are triggered
@@ -63,7 +72,9 @@ local plugins = {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
   },
   -- To make a plugin not be loaded
   -- {

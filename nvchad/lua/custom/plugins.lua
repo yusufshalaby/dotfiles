@@ -57,6 +57,25 @@ local plugins = {
   },
 
   {
+    "tpope/vim-fugitive",
+    init = function()
+      -- load gitsigns only when a git file is opened
+      vim.api.nvim_create_autocmd({ "BufRead" }, {
+        group = vim.api.nvim_create_augroup("FugitiveLazyLoad", { clear = true }),
+        callback = function()
+          vim.fn.system("git -C " .. '"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
+          if vim.v.shell_error == 0 then
+            vim.api.nvim_del_augroup_by_name "FugitiveLazyLoad"
+            vim.schedule(function()
+              require("lazy").load { plugins = { "vim-fugitive" } }
+            end)
+          end
+        end,
+      })
+    end,
+  },
+
+  {
     "zbirenbaum/copilot.lua",
     -- Lazy load when event occurs. Events are triggered
     -- as mentioned in:

@@ -1,5 +1,5 @@
 # BEGIN_KITTY_THEME
-# Monokai Soda
+# Nightfox
 include current-theme.conf
 # END_KITTY_THEME
 
@@ -12,8 +12,8 @@ cursor_beam_thickness 1
 macos_option_as_alt yes
 tab_bar_margin_width 40
 
+include font-nerd-symbols.conf
 
-# font_family Hack Nerd Font Mono Regular
-# bold_font Hack Nerd Font Mono Bold
-# italic_font Hack Nerd Font Mono Italic
-# bold_italic_font Hack Nerd Font Mono Bold Italic
+# background_image ~/.config/kitty/background_images/The-Wire-The-Indian-Express.png
+# background_tint 0.98
+# background_image_layout cscaled

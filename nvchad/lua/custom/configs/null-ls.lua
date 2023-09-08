@@ -26,6 +26,8 @@ local sources = {
   b.diagnostics.ruff,
   b.formatting.black,
   b.formatting.isort,
+  b.diagnostics.sqlfluff,
+  b.formatting.sqlfluff,
 }
 
 null_ls.setup {

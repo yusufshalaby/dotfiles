@@ -1,9 +1,9 @@
 # BEGIN_KITTY_THEME
-# Nightfox
+# Rosé Pine
 include current-theme.conf
 # END_KITTY_THEME
 
-font_size 16
+font_size 14
 tab_bar_edge top
 tab_bar_style powerline
 cursor_shape underline
@@ -12,8 +12,9 @@ cursor_beam_thickness 1
 macos_option_as_alt yes
 tab_bar_margin_width 40
 
+font_family Monaco
 include font-nerd-symbols.conf
 
-# background_image ~/.config/kitty/background_images/The-Wire-The-Indian-Express.png
-# background_tint 0.98
-# background_image_layout cscaled
+background_image ~/.config/kitty/background_images/TRAIN.png
+background_tint 0.99
+background_image_layout scaled

@@ -8,6 +8,7 @@ M.general = {
     ["<C-u>"] = { "<C-u>zz" },
     ["n"] = { "nzzzv" },
     ["N"] = { "Nzzzv" },
+    ["Q"] = { "<nop>" }
   },
 }
 

@@ -75,6 +75,12 @@ local plugins = {
     end,
   },
 
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    cmd = {"TSContextEnable", "TSContextDisable", "TSContextToggle"},
+  },
+
   {
     "zbirenbaum/copilot.lua",
     -- Lazy load when event occurs. Events are triggered

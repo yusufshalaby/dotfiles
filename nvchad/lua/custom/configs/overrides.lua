@@ -16,6 +16,7 @@ M.treesitter = {
     "yaml",
     "sql",
     "bash",
+    "json",
   },
   indent = {
     enable = true,
@@ -53,6 +54,7 @@ M.mason = {
     "pyright",
     "isort",
     "lua-language-server",
+    "sqlfluff",
     "stylua",
   },
 }

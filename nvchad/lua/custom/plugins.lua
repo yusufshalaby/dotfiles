@@ -47,14 +47,15 @@ local plugins = {
     end,
   },
 
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      extensions_list = { "themes", "terms", "fzf" },
-    },
-  },
+  -- commenting out because nvchad added this to default config
+  -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  --
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   opts = {
+  --     extensions_list = { "themes", "terms", "fzf" },
+  --   },
+  -- },
 
   {
     "tpope/vim-fugitive",

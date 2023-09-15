@@ -5,32 +5,40 @@ local b = null_ls.builtins
 local sources = {
 
   -- webdev stuff
-  -- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-  -- b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+  -- b.formatting.deno_fmt, -- chose deno for ts/js files bc its very fast!
+  b.formatting.prettierd.with { filetypes = { "html", "markdown", "css", "json", "yaml" } },
 
   -- Lua
   b.formatting.stylua,
 
   -- cpp
   -- b.formatting.clang_format,
-  -- null_ls.builtins.diagnostics.mypy.with({
-    -- extra_args = function()
-    -- local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_DEFAULT_ENV") or "/usr"
-  --   local handle = io.popen("which python")
-  --   local pypath = handle:read("*a")
-  --   handle:close()
-  --   pypath = string.gsub(pypath, '%s+', '')
-  --   return { "--python-executable", pypath }
-  --   end,
-  -- }),
   b.diagnostics.ruff,
   b.formatting.black,
   b.formatting.isort,
-  b.diagnostics.sqlfluff,
-  b.formatting.sqlfluff,
+  -- b.diagnostics.sqlfluff,
+  -- b.formatting.sqlfluff,
 }
+
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local on_attach = function(client, bufnr)
+  if client.supports_method "textDocument/formatting" then
+    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+        -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+        vim.lsp.buf.format { async = false }
+      end,
+    })
+  end
+end
 
 null_ls.setup {
   debug = true,
   sources = sources,
+  on_attach = on_attach,
 }

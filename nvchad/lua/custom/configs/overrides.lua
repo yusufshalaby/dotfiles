@@ -48,13 +48,15 @@ M.treesitter = {
 
 M.mason = {
   ensure_installed = {
+    "prettier",
+    "prettierd",
     "black",
     "mypy",
     "ruff",
     "pyright",
     "isort",
     "lua-language-server",
-    "sqlfluff",
+    -- "sqlfluff",
     "stylua",
   },
 }

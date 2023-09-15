@@ -22,6 +22,7 @@ lspconfig.pyright.setup {
       -- https://github.com/microsoft/pyright/blob/main/docs/settings.md
       analysis = {
         autoSearchPaths = true,
+        typeCheckingMode = "basic",
         diagnosticMode = "openFilesOnly",
         useLibraryCodeForTypes = true,
         diagnosticSeverityOverrides = {

@@ -104,9 +104,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ~/.bash_profile
+# source ~/.bash_profile
 
 alias ls="lsd"
 alias vim="nvim"
 alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
+alias v="fd --type f --hidden --exclude .git | fzf -m --preview='bat {}' | xargs nvim"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

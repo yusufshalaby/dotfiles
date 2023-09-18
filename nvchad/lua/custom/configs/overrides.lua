@@ -17,6 +17,7 @@ M.treesitter = {
     "sql",
     "bash",
     "json",
+    "rust",
   },
   indent = {
     enable = true,
@@ -58,6 +59,7 @@ M.mason = {
     "lua-language-server",
     -- "sqlfluff",
     "stylua",
+    "rust-analyzer",
   },
 }
 

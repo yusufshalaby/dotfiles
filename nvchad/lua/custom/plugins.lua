@@ -29,6 +29,23 @@ local plugins = {
   },
 
   {
+    "simrat39/rust-tools.nvim",
+    ft = { "rust" },
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require "custom.configs.rust-tools"
+    end,
+  },
+
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function()
+      vim.g.rustfmt_autosave = 1
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
   },
@@ -114,6 +131,9 @@ local plugins = {
     -- startup by commenting above and uncommenting below:
     -- lazy = false
     opts = overrides.copilot,
+    config = function()
+      require "custom.configs.copilot"
+    end,
   },
 
   {

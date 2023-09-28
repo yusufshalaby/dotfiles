@@ -6,21 +6,13 @@ local highlights = require "custom.highlights"
 
 M.ui = {
   theme = "tokyonight",
-  theme_toggle = { "tokyonight", "doomchad" },
+  theme_toggle = { "tokyonight", "tokyonight" },
   telescope = { style = "bordered" }, -- borderless / bordered
 
   hl_override = highlights.override,
   hl_add = highlights.add,
 
   -- transparency = true,
-  changed_themes = {
-    all = {
-      base_30 = {
-  -- Controlling the color of the line numbers
-        grey = "#7b7b7c",
-      }
-    }
-  }
 }
 
 M.plugins = "custom.plugins"

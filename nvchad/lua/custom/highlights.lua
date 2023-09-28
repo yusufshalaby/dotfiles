@@ -9,6 +9,9 @@ M.override = {
   Comment = {
     italic = true,
   },
+  LineNr = {
+    fg = "light_grey",
+  },
 }
 
 ---@type HLTable

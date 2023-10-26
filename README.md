@@ -12,6 +12,7 @@
 - oh-my-zsh
 - powerlevel10k
 - zsh-autosuggestions
+- zsh-syntax-highlighting
 - zsh-vi-mode
 
 ### Fonts

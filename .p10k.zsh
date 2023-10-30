@@ -943,6 +943,8 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
   typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='🐍'
+  # Don't show the name of the current virtual environment.
+  # typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION=
 
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
   # Anaconda environment color.

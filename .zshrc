@@ -81,9 +81,11 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-vi-mode
+  zsh-interactive-cd
 )
 ZVM_INIT_MODE=sourcing
 # ZVM_CURSOR_STYLE_ENABLED=false

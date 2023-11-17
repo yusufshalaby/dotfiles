@@ -5,7 +5,6 @@
 - lsd
 - neovim
 - ripgrep
-- yazi
 - zoxide
 
 ### Shell (zsh)

@@ -87,6 +87,7 @@ plugins=(
   zsh-vi-mode
   zsh-interactive-cd
 )
+# I think this line has to do with zsh-vi-mode...
 ZVM_INIT_MODE=sourcing
 # ZVM_CURSOR_STYLE_ENABLED=false
 
@@ -106,6 +107,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+export ZVM_VI_EDITOR='nvim'
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -122,10 +125,11 @@ source $ZSH/oh-my-zsh.sh
 
 alias ls="lsd"
 alias vim="nvim"
+alias vimg="vim +Git +only"
 alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
-alias v="fd --type f --hidden --no-ignore --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs nvim"
-alias b="fd --type f --hidden --no-ignore --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs bat"
+alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs nvim"
+alias b="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs bat"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

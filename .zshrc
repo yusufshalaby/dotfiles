@@ -123,7 +123,10 @@ export ZVM_VI_EDITOR='nvim'
 
 # source ~/.bash_profile
 
-alias ls="lsd"
+alias ls="eza"
+alias ll="eza -l --git"
+alias la="eza -la --git"
+alias l="eza -la --git"
 alias vim="nvim"
 alias vimg="vim +Git +only"
 alias pip="pip --require-virtualenv"

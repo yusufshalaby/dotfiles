@@ -106,7 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
-
+export VISUAL='nvim'
+export EDITOR="$VISUAL"
 export ZVM_VI_EDITOR='nvim'
 
 # Compilation flags

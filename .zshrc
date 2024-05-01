@@ -130,6 +130,7 @@ alias la="eza -la --git"
 alias l="eza -la --git"
 alias vim="nvim"
 alias vimg="vim +Git +only"
+alias oil="vim ."
 alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
 alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs nvim"
@@ -143,12 +144,4 @@ alias b="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 eval "$(zoxide init zsh)"
 
-function ya() {
-    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    yazi --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
-}
-
+eval "$(direnv hook zsh)"

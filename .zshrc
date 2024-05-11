@@ -136,6 +136,21 @@ alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
 alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs nvim"
 alias b="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs bat"
 
+vrg() {
+    local selected_file_line
+    selected_file_line=$(rg --color=always --line-number --no-heading --smart-case "${*:-}" | \
+        fzf --ansi \
+            --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+            --delimiter : \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
+            --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+            | awk -F: '{print "nvim +" $2 " " $1}')
+    
+    if [[ -n "$selected_file_line" ]]; then
+        eval "$selected_file_line"
+    fi
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # eval "$(starship init zsh)"
@@ -145,3 +160,5 @@ alias b="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='
 eval "$(zoxide init zsh)"
 
 eval "$(direnv hook zsh)"
+
+# . /usr/local/opt/asdf/libexec/asdf.sh

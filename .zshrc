@@ -133,8 +133,8 @@ alias vimg="vim +Git +only"
 alias oil="vim ."
 alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
-alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs nvim"
-alias b="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | xargs bat"
+alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 nvim"
+alias b="fd --type f --hidden --exclude .git --exclude venv | fzf --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 bat --paging=never"
 
 vrg() {
     local selected_file_line
@@ -144,7 +144,7 @@ vrg() {
             --delimiter : \
             --preview 'bat --color=always {1} --highlight-line {2}' \
             --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
-            | awk -F: '{print "nvim +" $2 " " $1}')
+            | awk -F: '{print "nvim +" $2 " \"" $1 "\""}')
     
     if [[ -n "$selected_file_line" ]]; then
         eval "$selected_file_line"

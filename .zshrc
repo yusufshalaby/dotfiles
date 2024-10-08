@@ -135,6 +135,8 @@ alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
 alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 nvim"
 alias b="fd --type f --hidden --exclude .git --exclude venv | fzf --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 bat --paging=never"
+alias pokemon="cat ~/.pokemon.txt| fzf -m --preview='pokeget {}' | xargs pokeget"
+alias gbranch="git checkout \$(git branch | fzf)"
 
 vrg() {
     local selected_file_line
@@ -149,6 +151,15 @@ vrg() {
     if [[ -n "$selected_file_line" ]]; then
         eval "$selected_file_line"
     fi
+}
+
+s() {
+        hosts=$(grep "^Host " ~/.ssh/config | awk '{print $2}' | grep -v "*" | grep -v "*$" | sort)
+        selected_host=$(echo "$hosts" | fzf --height=50% --reverse --prompt="SSH into: ")
+        if [ -n "$selected_host" ]
+        then
+                ssh "$selected_host"
+        fi
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

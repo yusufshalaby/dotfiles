@@ -17,5 +17,5 @@ while true; do
     fi
 done
 
-# Launch a new Kitty OS window with the specified name and title
-kitten @ launch --type os-window --os-window-title "$workspace_name" --os-window-name "$workspace_name"
+# Launch a new Kitty OS window with the specified name
+kitten @ launch --type os-window --os-window-name "$workspace_name"

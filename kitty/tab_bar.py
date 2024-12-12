@@ -20,9 +20,6 @@ ICON_BG: int = as_rgb(color_as_int(opts.inactive_tab_background))
 
 
 def _draw_icon(screen: Screen, tab: TabBarData, index: int) -> int:
-    # tm = get_boss().active_tab_manager
-    # wm_name = f"{tm.wm_name} " if tm else "uh-oh"
-
     wm_name = get_boss().tab_for_id(tab.tab_id).tab_manager_ref().wm_name
 
     if index != 1:

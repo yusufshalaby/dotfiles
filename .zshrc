@@ -84,7 +84,7 @@ plugins=(
   web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-vi-mode
+  # zsh-vi-mode
   zsh-interactive-cd
 )
 # I think this line has to do with zsh-vi-mode...
@@ -130,13 +130,27 @@ alias la="eza -la --git"
 alias l="eza -la --git"
 alias vim="nvim"
 alias vimg="vim +Git +only"
+# alias vimg="vim +'Neogit kind=split_above' +only"
 alias oil="vim ."
 alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
-alias v="fd --type f --hidden --exclude .git --exclude venv | fzf -m --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 nvim"
-alias b="fd --type f --hidden --exclude .git --exclude venv | fzf --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 bat --paging=never"
-alias pokemon="cat ~/.pokemon.txt| fzf -m --preview='pokeget {}' | xargs pokeget"
-alias gbranch="git checkout \$(git branch | fzf)"
+alias v="fd --type f --hidden --exclude .git --exclude venv --exclude '*.pdf' | fzf -m --preview='bat --color=always --style=plain {}' | tr '\n' '\0' | xargs -0 nvim"
+alias vd="fd --type d --hidden --exclude .git --exclude venv | fzf --reverse --height=70% --preview='eza --all --icons -1 --color=always {}' | tr '\n' '\0' | xargs -0 nvim"
+alias pokemon="cat ~/.pokemon.txt| fzf --reverse --height=70% -m --preview='pokeget {}' | xargs pokeget"
+alias gb="git checkout \$(git branch | fzf --height=50% --reverse --prompt='Checkout branch: ')"
+
+alias cl="clone-in-kitty --location=vsplit"
+alias cj="clone-in-kitty --location=hsplit"
+alias ct="clone-in-kitty --type=tab"
+
+
+# v() {
+#   local search_term="${1:-}"
+#   fd --type f --hidden --exclude .git --exclude venv --exclude '*.pdf' "$search_term" | \
+#   fzf -m --preview='bat --color=always --style=plain {}' | \
+#   tr '\n' '\0' | \
+#   xargs -0 nvim
+# }
 
 vrg() {
     local selected_file_line
@@ -158,8 +172,20 @@ s() {
         selected_host=$(echo "$hosts" | fzf --height=50% --reverse --prompt="SSH into: ")
         if [ -n "$selected_host" ]
         then
+            if [[ "$TERM" == "xterm-kitty" ]]; then
+                kitten ssh "$selected_host"
+            else
                 ssh "$selected_host"
+            fi
         fi
+}
+
+pdf() {
+  local search_term="${1:-}"
+  fd "$search_term" -e pdf | \
+  fzf -m --preview='pdftoppm -jpeg -f 1 -l 1 {} | kitty icat --clear --transfer-mode=memory --stdin=yes --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0' | \
+  tr '\n' '\0' | \
+  xargs -0 open
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -171,3 +197,18 @@ eval "$(direnv hook zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# asdf
+. "$HOME/.asdf/asdf.sh"
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+# Created by `pipx` on 2024-11-18 16:19:21
+export PATH="$PATH:/Users/yusufshalaby/.local/bin"
+
+# nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion

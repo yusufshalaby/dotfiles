@@ -1,21 +1,21 @@
 ### Important programs
-- bat 
+
+- bat
 - fd
 - fzf
-- lsd
+- exa
 - neovim
 - ripgrep
 - zoxide
 
 ### Shell (zsh)
+
 - oh-my-zsh
 - powerlevel10k
 - zsh-autosuggestions
 - zsh-syntax-highlighting
-- zsh-vi-mode
 
 ### Fonts
-- JetBrainsMono Nerd Font Mono (text)
-- UbuntuMono Nerd Font (symbols and icons)
-- nonicons (icons not found in nerd fonts)
 
+- JetBrains Mono (text)
+- Symbols Nerd Font Mono (icons not found in nerd fonts)

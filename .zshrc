@@ -124,13 +124,14 @@ export ZVM_VI_EDITOR='nvim'
 
 # source ~/.bash_profile
 
+
 alias ls="eza"
 alias ll="eza -l --git"
 alias la="eza -la --git"
 alias l="eza -la --git"
 alias vim="nvim"
 alias vimg="vim +Git +only"
-# alias vimg="vim +'Neogit kind=split_above' +only"
+alias dailynote="vim +'Obsidian today'"
 alias oil="vim ."
 alias pip="pip --require-virtualenv"
 alias pythonpaths="ls -l /usr/local/bin/python*" # list all python versions
@@ -143,6 +144,13 @@ alias cl="clone-in-kitty --location=vsplit"
 alias cj="clone-in-kitty --location=hsplit"
 alias ct="clone-in-kitty --type=tab"
 
+alias sam="SAM_CLI_TELEMETRY=0 sam"
+alias gbrowse="git ls-remote --get-url | xargs open"
+
+# unalias claude
+export CLAUDE_CODE_USE_BEDROCK=1
+export AWS_REGION=us-east-1  # or your preferred region
+
 
 # v() {
 #   local search_term="${1:-}"
@@ -151,6 +159,11 @@ alias ct="clone-in-kitty --type=tab"
 #   tr '\n' '\0' | \
 #   xargs -0 nvim
 # }
+
+bwfzf() {
+  local search_term="${1:-}"
+  bw list items --search "$search_term" | jq -r '.[] | "\(.login.password)\t\(.name)\t\(.login.username)"' | fzf --with-nth=2.. | cut -f1 | tr -d '\n' | pbcopy 
+}
 
 vrg() {
     local selected_file_line
@@ -172,6 +185,16 @@ s() {
         selected_host=$(echo "$hosts" | fzf --height=50% --reverse --prompt="SSH into: ")
         if [ -n "$selected_host" ]
         then
+            ssh "$selected_host"
+        fi
+}
+
+
+sk() {
+        hosts=$(grep "^Host " ~/.ssh/config | awk '{print $2}' | grep -v "*" | grep -v "*$" | sort)
+        selected_host=$(echo "$hosts" | fzf --height=50% --reverse --prompt="SSH into: ")
+        if [ -n "$selected_host" ]
+        then
             if [[ "$TERM" == "xterm-kitty" ]]; then
                 kitten ssh "$selected_host"
             else
@@ -184,6 +207,14 @@ pdf() {
   local search_term="${1:-}"
   fd "$search_term" -e pdf | \
   fzf -m --preview='pdftoppm -jpeg -f 1 -l 1 {} | kitty icat --clear --transfer-mode=memory --stdin=yes --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0' | \
+  tr '\n' '\0' | \
+  xargs -0 open
+}
+
+pics() {
+  local search_term="${1:-}"
+  fd "$search_term" -e png -e jpeg -e jpg | \
+  fzf -m --preview='cat {} | kitty icat --clear --transfer-mode=memory --stdin=yes --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0' | \
   tr '\n' '\0' | \
   xargs -0 open
 }
@@ -205,10 +236,13 @@ fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
-# Created by `pipx` on 2024-11-18 16:19:21
-export PATH="$PATH:/Users/yusufshalaby/.local/bin"
-
 # nvm
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 # [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export PATH="$PATH:$HOME/.local/bin:$HOME/go/bin"
+
+if [ -f "$HOME/.zshrc.local" ]; then
+  source "$HOME/.zshrc.local"
+fi

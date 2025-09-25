@@ -3,7 +3,7 @@
 - bat
 - fd
 - fzf
-- exa
+- eza
 - neovim
 - ripgrep
 - zoxide

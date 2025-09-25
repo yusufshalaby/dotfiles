@@ -15,12 +15,12 @@ from kitty.utils import color_as_int
 opts = get_options()
 
 
-ICON_FG: int = as_rgb(color_as_int(opts.color16))
+ICON_FG: int = as_rgb(color_as_int(opts.color11))
 ICON_BG: int = as_rgb(color_as_int(opts.inactive_tab_background))
 
 
 def _draw_icon(screen: Screen, tab: TabBarData, index: int) -> int:
-    wm_name = get_boss().tab_for_id(tab.tab_id).tab_manager_ref().wm_name
+    wm_name = get_boss().tab_for_id(tab.tab_id).tab_manager_ref().wm_name# + " "
 
     if index != 1:
         return screen.cursor.x
